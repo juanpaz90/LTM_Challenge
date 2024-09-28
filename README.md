@@ -24,6 +24,16 @@ Cloud Composer y para el segundo DataFlow.
 
 ## Arquitectura general.-
 
+[IMAGEN]
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
 
 
 
