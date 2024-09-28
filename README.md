@@ -24,15 +24,18 @@ Cloud Composer y para el segundo DataFlow.
 
 ## Arquitectura general.-
 
-[IMAGEN]
-
 ```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+flowchart TD
+    A([Productores de datos </br> Apps o Dispositivos IoT]) -->|Publicación de mensajes| B[Cloud Pub/Sub Topic];
+    B --> C[Cloud Function];
+    C --> D[(BigQuery)];
+    E((Usuario Final)) -->|Solicitud HTTP| F[API en Cloud Run];
+    F -->|Consulta| D;
+    D -->|Datos| F;
+    F -->|Respuesta HTTP| E;
 ```
+
+
 
 
 
