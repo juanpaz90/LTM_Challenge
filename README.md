@@ -11,10 +11,12 @@ la complejidad operativa.
 
 ### Tecnologías Utilizadas.- 
 
-Google Cloud Pub/Sub: Para la ingesta de datos desde diversas fuentes.
-Google Cloud Functions: Para el procesamiento y almacenamiento de los mensajes recibidos desde Pub/Sub.
-Google BigQuery: Como base de datos para almacenar y futuro analicis los datos recibidos.
-Google Cloud Run: Para el despliegue de la API HTTP que expone los datos almacenados en BigQuery.
+- **Google Cloud Pub/Sub:** Para la ingesta de datos desde diversas fuentes.
+- **Google Cloud Functions:** Para el procesamiento y almacenamiento de los mensajes recibidos desde Pub/Sub.
+- **Google BigQuery:** Como base de datos para almacenar y futuro analicis los datos recibidos.
+- **Google Cloud Run:** Para el despliegue de la API HTTP que expone los datos almacenados en BigQuery.
+- **Identity Aware Proxy (IAP):** Con el uso de IAP nos aseguramos que solo los usuarios auteticados puedan 
+acceder a la API. Ademas que nos evitamos manejar la autenticacion dento de la API.
 
 ```
 🔔 Por motivos de simplicidad se escogio Google Cloud Functions para el procesamiento de datos, ya que 
@@ -24,16 +26,27 @@ Cloud Composer y para el segundo DataFlow.
 
 ## Arquitectura general.-
 
-```mermaid
-flowchart TD
-    A([Productores de datos </br> Apps o Dispositivos IoT]) -->|Publicación de mensajes| B[Cloud Pub/Sub Topic];
-    B --> C[Cloud Function];
-    C --> D[(BigQuery)];
-    E((Usuario Final)) -->|Solicitud HTTP| F[API en Cloud Run];
-    F -->|Consulta| D;
-    D -->|Datos| F;
-    F -->|Respuesta HTTP| E;
-```
+![img.png](img.png)
+
+[//]: # (```mermaid)
+
+[//]: # (flowchart TD)
+
+[//]: # (    A&#40;[Productores de datos </br> Apps o Dispositivos IoT]&#41; -->|Publicación de mensajes| B[Cloud Pub/Sub Topic];)
+
+[//]: # (    B --> C[Cloud Function];)
+
+[//]: # (    C --> D[&#40;BigQuery&#41;];)
+
+[//]: # (    E&#40;&#40;Usuario Final&#41;&#41; -->|Solicitud HTTP| F[API en Cloud Run];)
+
+[//]: # (    F -->|Consulta| D;)
+
+[//]: # (    D -->|Datos| F;)
+
+[//]: # (    F -->|Respuesta HTTP| E;)
+
+[//]: # (```)
 
 
 
