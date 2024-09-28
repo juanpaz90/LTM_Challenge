@@ -17,6 +17,9 @@ python-dotenv = "==0.19.2"
 safety = "*"
 requests = "*"
 jsonschema = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+fastapi = {extras = ["standard"], version = "*"}
+google-cloud-bigquery = "*"
 
 [requires]
 python_version = "3.12"
