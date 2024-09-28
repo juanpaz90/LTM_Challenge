@@ -12,9 +12,9 @@ def app_info(app_id: int, app_department: str):
         return "You have to authenticate in your company portal"
 
 
-@app.get("/get_data/{department}:{num}")
-def get_data(department: str, num: int):
-    return {"Department": department, "Number": num}
+@app.get("/get_data/{action_id}:{user_email}")
+def get_data(action_id: str, user_email: int):
+    return {"Action Id": action_id, "Email": user_email}
 
 
 @app.get("/health")

@@ -21,6 +21,8 @@ uvicorn = {extras = ["standard"], version = "*"}
 fastapi = {extras = ["standard"], version = "*"}
 google-cloud-bigquery = "*"
 mangum = "*"
+pandas = "*"
+pandas-gbq = "*"
 
 [requires]
 python_version = "3.12"
