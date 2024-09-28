@@ -17,6 +17,8 @@ la complejidad operativa.
 - **Google Cloud Run:** Para el despliegue de la API HTTP que expone los datos almacenados en BigQuery.
 - **Identity Aware Proxy (IAP):** Con el uso de IAP nos aseguramos que solo los usuarios auteticados puedan 
 acceder a la API. Ademas que nos evitamos manejar la autenticacion dento de la API.
+- **Cloud Build:** Como herramienta de CI/CD se utilizo Cloud Build que es una solucion nativa de Google Cloud. La cual 
+permite una configuracion rapida y sin mayores complicaciones.
 
 ```
 🔔 Por motivos de simplicidad se escogio Google Cloud Functions para el procesamiento de datos, 
@@ -36,6 +38,7 @@ se publica un nuevo mensaje. Esta función procesa el mensaje y lo almacena en B
 - **Consulta y Exposición de Datos:** Los usuarios finales pueden hacer solicitudes HTTP a la API 
 desplegada en Cloud Run. La API realiza consultas a BigQuery para recuperar los datos solicitados y 
 los devuelve en la respuesta HTTP.
+
 
 ![img.png](img.png)
 
