@@ -20,6 +20,7 @@ jsonschema = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 fastapi = {extras = ["standard"], version = "*"}
 google-cloud-bigquery = "*"
+mangum = "*"
 
 [requires]
 python_version = "3.12"
