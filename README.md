@@ -119,28 +119,28 @@ A diferencia de Cloud Run, GKE permitiria un control más granular sobre cómo y
 sin depender tanto de las políticas automáticas de Cloud Run.
 Los arranques en frío se minimizan cuando se tiene un mayor control sobre la infraestructura, se puede optimizar 
 las configuraciones para reducir o eliminar el impacto de arranques en frío, manteniendo nodos y contenedores siempre listos.
-</br>
-</br>
+
+
 2. **Cloud Pub/Sub**
 Apache Kafka es una buena alternativa si se necesita manejar grandes volúmenes de datos en tiempo real. Su capacidad 
 de procesamiento en tiempo real, y retención de mensajes más robusta la convierten en una alternativa ideal (Siempre 
 y cuando se tengan grandes volumenes de datos).
-</br>
-</br>
+
+
 3. **Cloud Functions**
 DataFlow es una alternativa ideal cuando necesitas manejar grandes volúmenes de datos de manera continua (Streaming) o 
 en lotes (Batch). Tiene integración con Pub/Sub y ofrece un procesamiento paralelo a gran escala.
 Algunas de sus ventajas es el escalado automático, baja latencia en el procesamiento de datos en 
 tiempo real.
-</br>
-</br>
+
+
 4. **BigQuery**
 Cloud Spanner es una base de datos relacional y distribuida. A diferencia de BigQuery, Cloud Spanner esta disenado para
 tener una alta transaccionalidad, ademas de proporcionar los datos en tiempo real.
 Si se tiene consultas muy frecuentes y menos analíticas, Cloud Spanner puede ser más económico que BigQuery 
 porque no se basa en el modelo de "pago por tamano de Query"
-</br>
-</br>
+
+
 5. **Identity-Aware Proxy (IAP)**
 Para IAP se deberia tener en cuenta el uso de roles y permisos granulares. En otras palabras de debe asignar 
 roles específicos con los permisos mínimos necesarios. De esta forma se puede mejorar la seguridad y reducir 
@@ -153,13 +153,13 @@ la posibilidad de un mal uso.
 La latencia de solicitudes de la API mide el tiempo que tarda en responder, y es clave para detectar
 cuellos de botella en el procesamiento o acceso a datos. Yo utilizaria Google Cloud Monitoring ya que permite rastrear 
 esta métrica y tomar acciones rápidas si la latencia supera ciertos umbrales.
-</br>
-</br>
+
+
 2) **Cantidad de Mensajes recibidos en Cloud Pub/Sub**</br>
 El número de mensajes procesados en Pub/Sub ayuda a identificar problemas en la ingesta y procesamiento de datos. 
 Un alto numero de errores o reintentos puede señalar fallos de conectividad o saturacion en las Cloud Functions.
-</br>
-</br>
+
+
 3) **Errores de la API**</br>
 Finalmente, la tasa de errores de la API muestra el porcentaje de solicitudes fallidas `(4xx o 5xx)`. 
 Incrementos en estos errores pueden ser síntomas de problemas de autenticación, permisos o errores de lógica, 
@@ -172,10 +172,12 @@ tasa de errores y mensajes procesados en Pub/Sub. Permite crear dashboards perso
 que ayudan a identificar cuellos de botella y fallos, optimizando el rendimiento. 
 Su implementación en la nube es sencilla, ya que se integra con servicios como Cloud Run y BigQuery, 
 recolectando métricas automáticamente. 
-</br></br>
+
+
 Al escalar a 50 sistemas, la visualización agregaría métricas de clúster y uso de red, 
 pero la observabilidad podría complicarse si no se filtran adecuadamente, afectando la respuesta a incidentes 
 y el rendimiento general.
-</br></br>
+
+
 La escalabilidad puede generar demasiadas metricas, dificultando su análisis si no se agrupan o filtran correctamente. 
 Sin un monitoreo adecuado, podría ser difícil identificar problemas específicos.
