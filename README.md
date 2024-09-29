@@ -63,6 +63,28 @@ ultilizo _**gcloud cli**_, la cual es la linea de comandos proporcionada por GCP
 
 ## Parte 3: Pruebas de Integración y Puntos Críticos de Calidad
 
+### [Pruebas de integracion](./api/tests/test_api.py)
+La API cuenta con solo dos rutas críticas:
+```shell
+1) /get_data/{action_id}:{user_email}
+```
+Se probo que, para un _action_id_ y un _user_email_ validos, la API devuelva un estado 200 OK con los datos correctos.
+Se verifico que la lógica de la API maneja correctamente la ruta y devuelve los datos esperados en base a los parámetros proporcionados.
+
+```shell
+2) /app_info/{app_id}:{app_department}
+```
+Se probó que, cuando el usuario no está autenticado, la API devuelva el error esperado `(401 Unauthorized)`.
+Se valido el mecanismo de autenticación, ya que esta ruta ejecuta una funcion que usa la API de Bigquery para obtener la informacion.
+
+### Posibles Mejoras
+Para robustecer la suite de pruebas en el futuro, se deberia incluir:
+
+- Pruebas de carga y rendimiento, para asegurar que la API mantenga el desempeño bajo cargas elevadas.
+- Pruebas de validación de datos, para verificar que la entrada de datos erróneos o maliciosos sea manejada 
+correctamente por la API.
+
+
 ### Posibles Puntos Críticos en la Arquitectura
 
 1. **Cloud Run - Latencia y Escalabilidad:**
@@ -115,3 +137,5 @@ porque no se basa en el modelo de "pago por tamano de Query"
 Para IAP se deberia tener en cuenta el uso de roles y permisos granulares. En otras palabras de debe asignar 
 roles específicos con los permisos mínimos necesarios. De esta forma se puede mejorar la seguridad y reducir 
 la posibilidad de un mal uso.
+
+###
