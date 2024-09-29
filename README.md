@@ -59,3 +59,59 @@ Se utiliza la imagen almacenada en el Container Registry para desplegar la API e
 En el despliegue se incluyen los detalles de configuracion como la región, el puerto (8000), 
 los recursos asignados (2Gi de memoria, 1 CPU), y un mínimo de 1 instancia activa. Para esto se 
 ultilizo _**gcloud cli**_, la cual es la linea de comandos proporcionada por GCP.
+
+
+## Parte 3: Pruebas de Integración y Puntos Críticos de Calidad
+
+### Posibles Puntos Críticos en la Arquitectura
+
+1. **Cloud Run - Latencia y Escalabilidad:**
+Cloud Run escala automáticamente, pero puede generar latencia en el primer request 
+(cold start) y tiene un límite de peticiones simultáneas por instancia. 
+
+2. **Cloud Pub/Sub - Pérdida de Mensajes o Demoras:**
+Si el sistema tiene problemas de procesamiento o Cloud Functions no puede procesar mensajes lo suficientemente rápido, 
+los mensajes pueden acumularse, creando cuellos de botella.
+
+3. **Cloud Functions - Sobrecarga y Fallos en el Procesamiento:**
+Cloud Functions puede sobrecargarse si recibe demasiados mensajes al mismo tiempo o si el procesamiento 
+de cada mensaje es demasiado lento.
+
+4. **BigQuery - Performance de Consultas y Costos:**
+Si las consultas a BigQuery son muy complejas o se ejecutan con demasiada frecuencia, esto puede generar 
+altos costos y latencia significativa.
+
+5. **Identity-Aware Proxy (IAP) - Autenticación y Acceso:**
+Si la configuración de IAP no fue correctamente configurada, puede introducir latencias en la autenticación o posibles 
+brechas de seguridad.
+
+### Posibles Puntos de mejora en la Arquitectura
+
+1. **Cloud Run**
+Google Kubernetes Engine (GKE) es una buena alternativa que permite una escalabilidad controlada. 
+A diferencia de Cloud Run, GKE permitiria un control más granular sobre cómo y cuándo escalar la API, 
+sin depender tanto de las políticas automáticas de Cloud Run.
+Los arranques en frío se minimizan cuando se tiene un mayor control sobre la infraestructura, se puede optimizar 
+las configuraciones para reducir o eliminar el impacto de arranques en frío, manteniendo nodos y contenedores siempre listos.
+
+2. **Cloud Pub/Sub**
+Apache Kafka es una buena alternativa si se necesita manejar grandes volúmenes de datos en tiempo real. Su capacidad 
+de procesamiento en tiempo real, y retención de mensajes más robusta la convierten en una alternativa ideal (Siempre 
+y cuando se tengan grandes volumenes de datos).
+
+3. **Cloud Functions**
+DataFlow es una alternativa ideal cuando necesitas manejar grandes volúmenes de datos de manera continua (Streaming) o 
+en lotes (Batch). Tiene integración con Pub/Sub y ofrece un procesamiento paralelo a gran escala.
+Algunas de sus ventajas es el escalado automático, baja latencia en el procesamiento de datos en 
+tiempo real.
+
+4. **BigQuery**
+Cloud Spanner es una base de datos relacional y distribuida. A diferencia de BigQuery, Cloud Spanner esta disenado para
+tener una alta transaccionalidad, ademas de proporcionar los datos en tiempo real.
+Si se tiene consultas muy frecuentes y menos analíticas, Cloud Spanner puede ser más económico que BigQuery 
+porque no se basa en el modelo de "pago por tamano de Query"
+
+5. **Identity-Aware Proxy (IAP)**
+Para IAP se deberia tener en cuenta el uso de roles y permisos granulares. En otras palabras de debe asignar 
+roles específicos con los permisos mínimos necesarios. De esta forma se puede mejorar la seguridad y reducir 
+la posibilidad de un mal uso.
