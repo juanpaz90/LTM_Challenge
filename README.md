@@ -90,23 +90,23 @@ correctamente por la API.
 1. **Cloud Run - Latencia y Escalabilidad:**
 Cloud Run escala automáticamente, pero puede generar latencia en el primer request 
 (cold start) y tiene un límite de peticiones simultáneas por instancia. 
-</br>
-</br>
+
+
 2. **Cloud Pub/Sub - Pérdida de Mensajes o Demoras:**
 Si el sistema tiene problemas de procesamiento o Cloud Functions no puede procesar mensajes lo suficientemente rápido, 
 los mensajes pueden acumularse, creando cuellos de botella.
-</br>
-</br>
+
+
 3. **Cloud Functions - Sobrecarga y Fallos en el Procesamiento:**
 Cloud Functions puede sobrecargarse si recibe demasiados mensajes al mismo tiempo o si el procesamiento 
 de cada mensaje es demasiado lento.
-</br>
-</br>
+
+
 4. **BigQuery - Performance de Consultas y Costos:**
 Si las consultas a BigQuery son muy complejas o se ejecutan con demasiada frecuencia, esto puede generar 
 altos costos y latencia significativa.
-</br>
-</br>
+
+
 5. **Identity-Aware Proxy (IAP) - Autenticación y Acceso:**
 Si la configuración de IAP no fue correctamente configurada, puede introducir latencias en la autenticación o posibles 
 brechas de seguridad.
