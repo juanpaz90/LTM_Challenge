@@ -13,7 +13,7 @@ def test_get_data():
     assert response.json() == {"Action Id": action_id, "Email": user_email}
 
 
-def test_read_app_info():
+def test_app_info():
     app_id = 321
     app_department = "LTM_dept"
     response = client.get(f"/app_info/{app_id}:{app_department}")
