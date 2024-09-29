@@ -165,3 +165,17 @@ Finalmente, la tasa de errores de la API muestra el porcentaje de solicitudes fa
 Incrementos en estos errores pueden ser síntomas de problemas de autenticación, permisos o errores de lógica, 
 lo que puede ser fácilmente detectado y gestionado mediante Google Cloud Logging.
 
+- **Herramienta de vizualizacion y monitoreo**
+</br>
+Google Cloud Monitoring es ideal para visualizar métricas como la latencia de la API, 
+tasa de errores y mensajes procesados en Pub/Sub. Permite crear dashboards personalizados 
+que ayudan a identificar cuellos de botella y fallos, optimizando el rendimiento. 
+Su implementación en la nube es sencilla, ya que se integra con servicios como Cloud Run y BigQuery, 
+recolectando métricas automáticamente. 
+</br></br>
+Al escalar a 50 sistemas, la visualización agregaría métricas de clúster y uso de red, 
+pero la observabilidad podría complicarse si no se filtran adecuadamente, afectando la respuesta a incidentes 
+y el rendimiento general.
+</br></br>
+La escalabilidad puede generar demasiadas metricas, dificultando su análisis si no se agrupan o filtran correctamente. 
+Sin un monitoreo adecuado, podría ser difícil identificar problemas específicos.
